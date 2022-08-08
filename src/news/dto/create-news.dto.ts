@@ -1,6 +1,9 @@
+import { IsNotEmpty } from 'class-validator'
+
 export class CreateNewsDto {
-    title: string;
-    description: string;
-    link: string;
-    image_filepath: string;
+  @IsNotEmpty()
+  title: string
+  @IsNotEmpty()
+  description: string
+  //   link: string
 }
