@@ -5,10 +5,10 @@ export type NewsDocument = News & Document
 
 @Schema()
 export class News {
-    @Prop()
+    @Prop({ required: true })
     title: string
 
-    @Prop()
+    @Prop({ required: true })
     description: string
 
 
