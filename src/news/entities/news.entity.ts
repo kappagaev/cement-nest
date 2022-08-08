@@ -5,18 +5,14 @@ export type NewsDocument = News & Document
 
 @Schema()
 export class News {
-    @Prop({ required: true })
-    title: string
+  @Prop({ required: true })
+  title: string
 
-    @Prop({ required: true })
-    description: string
+  @Prop({ required: true })
+  description: string
 
-
-    @Prop()
-    link: string
-
-    @Prop()
-    image_filepath: string
+  @Prop()
+  image_filepath: string
 }
 
 export const NewsSchema = SchemaFactory.createForClass(News)
