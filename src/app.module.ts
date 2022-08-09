@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module'
 import { NewsModule } from './news/news.module'
 import { FileModule } from './file/file.module';
 import { MulterModule } from '@nestjs/platform-express'
+import { SliderModule } from './slider/slider.module';
 
 @Module({
     imports: [
@@ -16,6 +17,7 @@ import { MulterModule } from '@nestjs/platform-express'
         UserModule,
         NewsModule,
         FileModule,
+        SliderModule,
     ],
     controllers: [AppController],
     providers: [AppService],
