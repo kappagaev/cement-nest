@@ -17,8 +17,6 @@ export class AuthService {
     @InjectModel('RefreshToken') private refreshTokenModel: Model<RefreshTokenDocument>,
   ) {}
 
-  private
-
   private async validateUser(email: string, password: string): Promise<UserDocument> {
     const user = await this.userService.findByEmail(email)
     const isMatch = compareSync(password, user.password)
