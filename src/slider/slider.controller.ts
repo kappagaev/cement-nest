@@ -16,7 +16,9 @@ import { CreateSliderDto } from './dto/create-slider.dto'
 import { UpdateSliderDto } from './dto/update-slider.dto'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { FileService } from 'src/file/file.service'
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger'
 
+@ApiTags('slider')
 @Controller('slider')
 export class SliderController {
   constructor(private readonly sliderService: SliderService, private readonly fileService: FileService) {}
@@ -30,6 +32,18 @@ export class SliderController {
 
   @Post('/:id/image')
   @UseInterceptors(FileInterceptor('image'))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        image: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   async addImage(@Param('id') id: string, @UploadedFile() image: Express.Multer.File) {
     if (!image) {
       throw new HttpException('No image', HttpStatus.BAD_REQUEST)

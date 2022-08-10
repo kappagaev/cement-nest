@@ -16,12 +16,15 @@ import { CreateNewsDto } from './dto/create-news.dto'
 import { UpdateNewsDto } from './dto/update-news.dto'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { FileService } from 'src/file/file.service'
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger'
 
+@ApiTags('news')
 @Controller('news')
 export class NewsController {
   constructor(private readonly newsService: NewsService, private readonly fileService: FileService) {}
 
   @Post()
+  @ApiBody({ type: CreateNewsDto })
   async create(@Body() createNewsDto: CreateNewsDto, @UploadedFile() image: Express.Multer.File) {
     const news = await this.newsService.create(createNewsDto)
 
@@ -30,6 +33,18 @@ export class NewsController {
 
   @Post('/:id/image')
   @UseInterceptors(FileInterceptor('image'))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        image: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   async addImage(@Param('id') id: string, @UploadedFile() image: Express.Multer.File) {
     if (!image) {
       throw new HttpException('No image', HttpStatus.BAD_REQUEST)
@@ -56,6 +71,7 @@ export class NewsController {
   }
 
   @Patch(':id')
+  @ApiBody({ type: UpdateNewsDto })
   update(@Param('id') id: string, @Body() updateNewsDto: UpdateNewsDto) {
     return this.newsService.update(+id, updateNewsDto)
   }
