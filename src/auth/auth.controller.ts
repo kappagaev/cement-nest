@@ -14,6 +14,9 @@ export class AuthController {
   @ApiBody({ type: LocalSigninDto })
   async signinLocal(@Body() { email, password }: LocalSigninDto) {
     const tokens = await this.authService.signinLocal(email, password)
+    if (tokens == null) {
+      throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED)
+    }
     return tokens
   }
 
