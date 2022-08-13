@@ -19,11 +19,10 @@ export class AuthService {
 
   private async validateUser(email: string, password: string): Promise<UserDocument> {
     const user = await this.userService.findByEmail(email)
-    const isMatch = compareSync(password, user.password)
-    if (user && isMatch) {
-      return user
+    if (!user || !compareSync(password, user.password)) {
+      return null
     }
-    return null
+    return user
   }
 
   private createPayload(user: UserDocument) {
