@@ -20,18 +20,18 @@ export class SliderService {
   }
 
   findAll() {
-    return `This action returns all slider`
+    return this.sliderModel.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} slider`
+  findOne(id: string) {
+    return this.sliderModel.findById(id)
   }
 
-  update(id: number, updateSliderDto: UpdateSliderDto) {
-    return `This action updates a #${id} slider`
+  update(id: string, updateSliderDto: UpdateSliderDto) {
+    return this.sliderModel.findByIdAndUpdate(id, updateSliderDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} slider`
+  remove(id: string) {
+    return this.sliderModel.findByIdAndRemove(id)
   }
 }

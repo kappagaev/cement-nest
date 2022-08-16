@@ -60,22 +60,22 @@ export class SliderController {
   }
 
   @Get()
-  findAll() {
-    return this.sliderService.findAll()
+  async findAll() {
+    return (await this.sliderService.findAll()).reverse()
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.sliderService.findOne(+id)
+    return this.sliderService.findOne(id)
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSliderDto: UpdateSliderDto) {
-    return this.sliderService.update(+id, updateSliderDto)
+    return this.sliderService.update(id, updateSliderDto)
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.sliderService.remove(+id)
+    return this.sliderService.remove(id)
   }
 }
