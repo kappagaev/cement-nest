@@ -67,17 +67,17 @@ export class NewsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.newsService.findOne(+id)
+    return this.newsService.findOne(id)
   }
 
   @Patch(':id')
   @ApiBody({ type: UpdateNewsDto })
   update(@Param('id') id: string, @Body() updateNewsDto: UpdateNewsDto) {
-    return this.newsService.update(+id, updateNewsDto)
+    return this.newsService.update(id, updateNewsDto)
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.newsService.remove(+id)
+    return this.newsService.remove(id)
   }
 }

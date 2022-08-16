@@ -23,19 +23,19 @@ export class NewsService {
     return await news.save()
   }
 
-  findAll() {
-    return `This action returns all news`
+  async findAll() {
+    return (await this.newsModel.find()).reverse()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} news`
+  findOne(id: string) {
+    return this.newsModel.findById(id)
   }
 
-  update(id: number, updateNewsDto: UpdateNewsDto) {
-    return `This action updates a #${id} news`
+  update(id: string, updateNewsDto: UpdateNewsDto) {
+    return this.newsModel.findByIdAndUpdate(id, updateNewsDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} news`
+  remove(id: string) {
+    return this.newsModel.findByIdAndDelete(id)
   }
 }
