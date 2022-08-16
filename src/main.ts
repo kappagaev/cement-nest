@@ -16,6 +16,7 @@ async function bootstrap() {
   if (process.env.NODE_ENV === 'development') {
     swagger(app)
   }
+  app.enableCors()
   app.useGlobalFilters(new MongooseExceptionFilter())
   await app.listen(3000)
 }
