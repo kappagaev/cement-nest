@@ -8,6 +8,7 @@ import swagger from './swagger'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  app.setGlobalPrefix('api')
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -18,6 +19,6 @@ async function bootstrap() {
   }
   app.enableCors()
   app.useGlobalFilters(new MongooseExceptionFilter())
-  await app.listen(3000)
+  await app.listen(process.env.PORT || 3333)
 }
 bootstrap()
