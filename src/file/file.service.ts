@@ -10,7 +10,7 @@ export class FileService {
   async upload(file: Express.Multer.File) {
     const fileName = this.generateFileName(file)
     await fs.writeFile(join(this.uploadPath, fileName), file.buffer, 'binary')
-    return fileName
+    return process.env.PUBLIC_UPLOADS_PATH + fileName
   }
 
   private generateFileName(file: Express.Multer.File) {

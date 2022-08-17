@@ -9,11 +9,17 @@ import { MulterModule } from '@nestjs/platform-express'
 import { SliderModule } from './slider/slider.module'
 import { AuthModule } from './auth/auth.module'
 import { ConfigModule } from '@nestjs/config'
+import { ServeStaticModule } from '@nestjs/serve-static'
+import { join } from 'path'
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/cement', {
       autoIndex: true,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads'
     }),
     MulterModule.register({ dest: './uploads' }),
     UserModule,
