@@ -37,7 +37,7 @@ export class AuthService {
   private getTokens(payload: any) {
     const accessToken = this.jwtService.signAsync(payload, {
       secret: this.configService.get<string>('ACCESS_TOKEN_SECRET'),
-      expiresIn: '15m',
+      expiresIn: '10s',
     })
     const refreshToken = this.jwtService.signAsync(payload, {
       secret: this.configService.get<string>('REFRESH_TOKEN_SECRET'),
@@ -84,6 +84,6 @@ export class AuthService {
 
     this.saveRefreshToken(newRefreshToken, user_id)
 
-    return { accessToken, newRefreshToken }
+    return { accessToken, refreshToken: newRefreshToken }
   }
 }
